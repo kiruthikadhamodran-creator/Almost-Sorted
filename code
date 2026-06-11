@@ -1,0 +1,37 @@
+def almostSorted(arr):
+    sorted_arr = sorted(arr)
+
+    if arr == sorted_arr:
+        print("yes")
+        return
+
+    diff = []
+    for i in range(len(arr)):
+        if arr[i] != sorted_arr[i]:
+            diff.append(i)
+
+    # Try swap
+    temp = arr[:]
+    l, r = diff[0], diff[-1]
+    temp[l], temp[r] = temp[r], temp[l]
+
+    if temp == sorted_arr:
+        print("yes")
+        print(f"swap {l + 1} {r + 1}")
+        return
+
+    # Try reverse
+    temp = arr[:]
+    temp[l:r + 1] = reversed(temp[l:r + 1])
+
+    if temp == sorted_arr:
+        print("yes")
+        print(f"reverse {l + 1} {r + 1}")
+        return
+
+    print("no")
+
+
+n = int(input())
+arr = list(map(int, input().split()))
+almostSorted(arr)
